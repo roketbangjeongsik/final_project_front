@@ -1,6 +1,6 @@
-import Header from './Header';
-import HeroSection from './HeroSection';
-import CardSection from './CardSection';
+import Header from '../components/main/Header';
+import HeroSection from '../components/main/HeroSection';
+import CardSection from '../components/main/CardSection';
 
 export default function MainPage() {
   return (

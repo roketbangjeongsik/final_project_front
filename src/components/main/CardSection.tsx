@@ -1,10 +1,10 @@
 import CardRow from './CardRow';
 import TextCard from './TextCard';
 import ImageCard from './ImageCard';
-import image1 from '../assets/image1.png';
-import image2 from '../assets/image2.png';
-import image3 from '../assets/image3.png';
-import curveLine from '../assets/Rectangle.svg';
+import image1 from '/src/assets/image1.png'
+import image2 from '/src/assets/image2.png';
+import image3 from '/src/assets/image3.png';
+import curveLine from '/src/assets/Rectangle.svg';
 
 export default function CardSection() {
   return (
