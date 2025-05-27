@@ -1,17 +1,10 @@
-import { FiChevronsLeft } from "react-icons/fi";
-
 interface FileItemProps {
   title: string;
   user: string;
   updated: string;
-  showIcon?: boolean;
 }
 
-const FileItem = ({
-  title,
-  user,
-  updated,
-  showIcon = false,
+const FileItem = ({ title, user, updated
 }: FileItemProps) => (
   <div className="flex items-center justify-between py-4">
     <div className="flex items-center space-x-3">
