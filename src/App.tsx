@@ -1,7 +1,8 @@
 import MainPage from './pages/Mainpage';
+import { RepositoryPage } from './pages/RepositoryPage';
 
 function App() {
-  return <MainPage />;
+  return <RepositoryPage />;
 }
 
 export default App;
