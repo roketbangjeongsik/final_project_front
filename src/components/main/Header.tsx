@@ -1,4 +1,4 @@
-export default function Header() {
+const Header = () => {
   return (
     <header className="fixed top-0 left-0 right-0 bg-white z-50">
       <div className="flex justify-between items-center px-24 md:px-40 py-6">
@@ -11,4 +11,5 @@ export default function Header() {
       </div>
     </header>
   );
-}
+};
+export default Header;

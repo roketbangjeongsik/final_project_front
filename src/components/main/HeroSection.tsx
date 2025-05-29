@@ -1,4 +1,4 @@
-export default function HeroSection() {
+const HeroSection = () => {
   return (
     <section className="text-center pt-[150px] py-32 my-[100px]">
       <h2 className="text-2xl md:text-4xl font-bold mt-20 mb-10">코드 분석, 로켓처럼 빠르게</h2>
@@ -10,4 +10,5 @@ export default function HeroSection() {
       </button>
     </section>
   );
-}
+};
+export default HeroSection;

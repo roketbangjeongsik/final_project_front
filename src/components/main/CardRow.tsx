@@ -6,7 +6,7 @@ interface CardRowProps {
   reverse?: boolean;
 }
 
-export default function CardRow({ textCard, imageCard, reverse = false }: CardRowProps) {
+const CardRow = ({ textCard, imageCard, reverse = false }: CardRowProps) => {
   return (
     <div
       className={`flex flex-col md:flex-row gap-4 items-stretch ${reverse ? 'md:flex-row-reverse' : ''}`}
@@ -18,4 +18,6 @@ export default function CardRow({ textCard, imageCard, reverse = false }: CardRo
       <div className="w-full md:basis-2/3">{imageCard}</div>
     </div>
   );
-}
+};
+
+export default CardRow;

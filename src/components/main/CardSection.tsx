@@ -1,12 +1,12 @@
 import CardRow from './CardRow';
 import TextCard from './TextCard';
 import ImageCard from './ImageCard';
-import image1 from '/src/assets/image1.png'
+import image1 from '/src/assets/image1.png';
 import image2 from '/src/assets/image2.png';
 import image3 from '/src/assets/image3.png';
 import curveLine from '/src/assets/Rectangle.svg';
 
-export default function CardSection() {
+const CardSection = () => {
   return (
     <section className="relative px-20 py-20 bg-white space-y-16 overflow-hidden">
       <h1 className="text-center text-3xl font-bold mb-[150px]">About RocketInsight</h1>
@@ -36,4 +36,6 @@ export default function CardSection() {
       </div>
     </section>
   );
-}
+};
+
+export default CardSection;
