@@ -1,90 +1,54 @@
-import { useEffect, useRef, useState } from 'react';
 import type { Repository } from '../../types/repository';
-import { FilterBar } from './FilterBar';
-import { RepositoryCard } from './RepositoryCard';
-import { Pagination } from './Pagination';
+import { GenericItemList } from '../common/GenericItemList';
+import { useState } from 'react';
 
-type Props = { repositories: Repository[] };
+type Props = {
+  repositories: Repository[];
+};
 
 export const RepositoryList = ({ repositories }: Props) => {
-  const [search, setSearch] = useState('');
   const [language, setLanguage] = useState('All');
-  const [sort, setSort] = useState('Name');
-  const [currentPage, setCurrentPage] = useState(1);
-  const [cardsPerPage, setCardsPerPage] = useState(1);
 
-  const containerRef = useRef<HTMLDivElement>(null);
-  const filterRef = useRef<HTMLDivElement>(null);
-  const paginationRef = useRef<HTMLDivElement>(null);
-  const cardRef = useRef<HTMLDivElement>(null);
-
-  // 필터/정렬
   const langs = Array.from(new Set(repositories.map(repo => repo.language).filter(Boolean))).sort();
-  const filtered = repositories
-    .filter(repo => repo.name.toLowerCase().includes(search.toLowerCase()))
-    .filter(repo => (language === 'All' ? true : repo.language === language))
-    .sort((a, b) =>
-      sort === 'Name'
-        ? a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' })
-        : new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
-    );
-
-  // 카드 개수 계산
-  useEffect(() => {
-    const update = () => {
-      if (!containerRef.current || !filterRef.current || !paginationRef.current || !cardRef.current)
-        return;
-
-      const containerH = containerRef.current.clientHeight;
-      const filterH = filterRef.current.getBoundingClientRect().height;
-      const paginationH = paginationRef.current.getBoundingClientRect().height;
-      const cardH = cardRef.current.getBoundingClientRect().height;
-      const availH = containerH - filterH - paginationH;
-      const count = Math.max(Math.floor(availH / cardH), 1);
-
-      setCardsPerPage(count);
-      setCurrentPage(1);
-    };
-
-    update();
-    window.addEventListener('resize', update);
-    return () => window.removeEventListener('resize', update);
-  }, [search, language, sort, repositories]);
-
-  // 페이지네이션
-  const totalPages = Math.ceil(filtered.length / cardsPerPage);
-  const startIndex = (currentPage - 1) * cardsPerPage;
-  const pageItems = filtered.slice(startIndex, startIndex + cardsPerPage);
 
   return (
-    <div ref={containerRef} className="flex flex-col h-full overflow-hidden">
-      <div ref={filterRef}>
-        <FilterBar
-          search={search}
-          setSearch={setSearch}
-          language={language}
-          setLanguage={setLanguage}
-          sort={sort}
-          setSort={setSort}
-          languages={langs}
-        />
-      </div>
-
-      <div className="flex flex-1 flex-col ">
-        {pageItems.map((repo, idx) => (
-          <div key={repo.id} ref={idx === 0 ? cardRef : undefined}>
-            <RepositoryCard repo={repo} />
-          </div>
-        ))}
-      </div>
-
-      <div ref={paginationRef} className="mt-auto">
-        <Pagination
-          totalPages={totalPages}
-          currentPage={currentPage}
-          onPageChange={setCurrentPage}
-        />
-      </div>
-    </div>
+    <GenericItemList
+      data={repositories}
+      searchBy={repo => repo.name}
+      sortBy={(a, b, sort) =>
+        sort === 'Name'
+          ? a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' })
+          : new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
+      }
+      renderTitle={repo => repo.name}
+      renderSubtitle={repo =>
+        `${repo.language} / ${new Date(repo.updated_at).toLocaleDateString('ko-KR')}`
+      }
+      extra={repo => (
+        <span className="text-xs px-3 py-1 border rounded-xl bg-surface text-text-description">
+          {repo.visibility}
+        </span>
+      )}
+      onSelect={() => {}} // 동작은 추후 구현 예정
+      sorts={[
+        { label: '이름순', value: 'Name' },
+        { label: '최신순', value: 'updated_at' },
+      ]}
+      extraFilters={
+        <select
+          value={language}
+          onChange={e => setLanguage(e.target.value)}
+          className="border border-border focus:border-primary focus:outline-none rounded-lg px-4 py-2"
+        >
+          <option value="All">모든 언어</option>
+          {langs.map(lang => (
+            <option key={lang} value={lang}>
+              {lang}
+            </option>
+          ))}
+        </select>
+      }
+      filters={[repo => language === 'All' || repo.language === language]}
+    />
   );
 };
