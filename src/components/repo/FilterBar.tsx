@@ -17,7 +17,10 @@ export const FilterBar = ({
   setSort,
   languages,
 }: Props) => {
-  const sorts = ['이름순', '최신순'];
+  const sorts = [
+    { label: '이름순', value: 'Name' },
+    { label: '최신순', value: 'updated_at' },
+  ];
 
   return (
     <div className="flex flex-wrap items-center justify-between my-8 gap-4">
@@ -47,8 +50,8 @@ export const FilterBar = ({
           className="border border-border focus:border-primary focus:outline-none rounded-lg px-4 py-2"
         >
           {sorts.map(s => (
-            <option key={s} value={s}>
-              {s === 'updated_at' ? 'Updated' : s}
+            <option key={s.value} value={s.value}>
+              {s.label === 'updated_at' ? 'Updated' : s.label}
             </option>
           ))}
         </select>
