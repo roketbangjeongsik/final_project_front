@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 const HeroSection = () => {
   return (
     <section className="text-center pt-[150px] py-32 my-[100px]">
@@ -5,9 +6,11 @@ const HeroSection = () => {
       <p className="text-text-description mb-10">
         개발자의 리뷰 부담을 줄이고, 협업의 품질을 높입니다.
       </p>
-      <button className="bg-primary text-white px-6 py-2 rounded hover:bg-primary-hover transition">
-        시작하기
-      </button>
+      <Link to="/repo">
+        <button className="bg-primary text-white px-6 py-2 rounded hover:bg-primary-hover transition">
+          시작하기
+        </button>
+      </Link>
     </section>
   );
 };
