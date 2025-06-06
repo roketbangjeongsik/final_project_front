@@ -1,7 +1,11 @@
 export type Repository = {
-  id: number;
-  name: string;
+  full_name: string;
   language: string;
-  visibility: 'public' | 'private';
+  name: string;
+  owner: {
+    login: string;
+  };
+  privateRepo: boolean;
   updated_at: string;
+  visibility: 'public' | 'private';
 };
