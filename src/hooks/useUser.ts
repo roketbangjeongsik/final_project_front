@@ -13,7 +13,6 @@ export const useUser = () => {
       .catch(() => setUser(null))
       .finally(() => setLoading(false));
   }, []);
-  console.log(user);
 
   // 로그아웃 API 호출
   const logout = () => {
