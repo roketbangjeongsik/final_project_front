@@ -11,7 +11,7 @@ export const PullRequestList = ({
   return (
     <GenericItemList
       data={prs}
-      searchBy={pr => pr.number.toString()}
+      searchBy={pr => `${pr.title} ${pr.user.login} #${pr.number}`.toLowerCase()}
       sortBy={(a, b, sort) =>
         sort === 'created_at'
           ? new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
