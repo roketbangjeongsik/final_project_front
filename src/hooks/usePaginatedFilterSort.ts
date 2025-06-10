@@ -43,7 +43,7 @@ export const usePaginatedFilterSort = <T>({
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [search, sort, filters]);
+  }, [search, sort]);
 
   return {
     search,
