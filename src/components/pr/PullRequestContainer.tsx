@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { fetchPullRequests } from '../../api/pr';
 import type { PullRequest } from '../../types/pr';
 import { PullRequestList } from './PullRequestList';
 
 export const PullRequestContainer = () => {
+  const navigate = useNavigate();
   const { owner, repo } = useParams();
   const [prs, setPrs] = useState<PullRequest[]>([]);
   const [loading, setLoading] = useState(true);
@@ -25,5 +26,10 @@ export const PullRequestContainer = () => {
 
   if (loading) return <div>PR목록 불러오는중...</div>;
 
-  return <PullRequestList prs={prs} onSelect={() => {}} />;
+  return (
+    <PullRequestList
+      prs={prs}
+      onSelect={pr => navigate(`/repos/${owner}/${repo}/pulls/${pr.number}/commits`)}
+    />
+  );
 };
