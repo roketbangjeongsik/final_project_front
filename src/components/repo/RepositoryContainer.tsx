@@ -31,12 +31,9 @@ export const RepositoryContainer = () => {
   if (loading) return <div>로딩중...</div>;
 
   return (
-    <div>
-      <RepositoryList
-        repositories={repositories}
-        onSelect={repo => navigate(`/repos/${repo.owner.login}/${repo.name}/prs`)}
-      />
-      ;
-    </div>
+    <RepositoryList
+      repositories={repositories}
+      onSelect={repo => navigate(`/repos/${repo.owner.login}/${repo.name}/prs`)}
+    />
   );
 };
