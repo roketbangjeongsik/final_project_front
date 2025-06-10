@@ -4,9 +4,10 @@ import { useState } from 'react';
 
 type Props = {
   repositories: Repository[];
+  onSelect: (repo: Repository) => void;
 };
 
-export const RepositoryList = ({ repositories }: Props) => {
+export const RepositoryList = ({ repositories, onSelect }: Props) => {
   const [language, setLanguage] = useState('All');
 
   const langs = Array.from(new Set(repositories.map(repo => repo.language).filter(Boolean))).sort();
@@ -14,7 +15,7 @@ export const RepositoryList = ({ repositories }: Props) => {
   return (
     <GenericItemList
       data={repositories}
-      searchBy={repo => repo.name}
+      searchBy={repo => repo.full_name}
       sortBy={(a, b, sort) =>
         sort === 'Name'
           ? a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' })
@@ -29,7 +30,7 @@ export const RepositoryList = ({ repositories }: Props) => {
           {repo.visibility}
         </span>
       )}
-      onSelect={() => {}} // 동작은 추후 구현 예정
+      onSelect={onSelect}
       sorts={[
         { label: '이름순', value: 'Name' },
         { label: '최신순', value: 'updated_at' },
