@@ -11,7 +11,7 @@ export const CommitList = ({
   return (
     <GenericItemList
       data={commits}
-      searchBy={commit => commit.sha}
+      searchBy={commit => commit.commit.message}
       sortBy={(a, b, sort) =>
         sort === 'date'
           ? new Date(b.commit.author.date).getTime() - new Date(a.commit.author.date).getTime()
