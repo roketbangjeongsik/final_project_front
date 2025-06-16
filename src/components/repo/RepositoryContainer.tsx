@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import type { Repository } from '../../types/repository';
@@ -13,10 +12,7 @@ export const RepositoryContainer = () => {
   useEffect(() => {
     const loadRepos = async () => {
       try {
-        const userRes = await axios.get('/api/v1/user/me');
-        const login = userRes.data.login;
-
-        const repos = await fetchUserRepositories(login);
+        const repos = await fetchUserRepositories();
         setRepositories(repos);
       } catch (error) {
         console.error('레포지토리 불러오기 실패 :', error);
