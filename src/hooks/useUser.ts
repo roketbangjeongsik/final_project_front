@@ -15,8 +15,14 @@ export const useUser = () => {
   }, []);
 
   // 로그아웃 API 호출
-  const logout = () => {
-    setUser(null);
+  const logout = async () => {
+    try {
+      await axios.post('/api/v1/user/logout');
+      setUser(null);
+      window.location.href = '/';
+    } catch (error) {
+      console.error('로그아웃 실패', error);
+    }
   };
 
   return { user, loading, logout };
