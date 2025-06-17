@@ -3,7 +3,7 @@ import MainPage from './pages/Mainpage';
 import { RepositoryPage } from './pages/RepositoryPage';
 import { PullRequestPage } from './pages/PullRequestPage';
 import { CommitPage } from './pages/CommitPage';
-import TestGitHubApis from './api/test';
+import { ReviewResultPage } from './pages/ReviewResultPage';
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
       <Route path="/repo" element={<RepositoryPage />} />
       <Route path="/repos/:owner/:repo/prs" element={<PullRequestPage />} />
       <Route path="/repos/:owner/:repo/pulls/:prNumber/commits" element={<CommitPage />} />
-      <Route path="/TestGitHubApis" element={<TestGitHubApis />} />
+      <Route path="/review-result" element={<ReviewResultPage />} />
     </Routes>
   );
 }
