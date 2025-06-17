@@ -1,3 +1,9 @@
+type CommitFile = {
+  filename: string;
+  changes: number;
+  patch: string;
+};
+
 export interface Commit {
   sha: string;
   commit: {
@@ -7,4 +13,5 @@ export interface Commit {
       date: string;
     };
   };
+  files: CommitFile[];
 }
